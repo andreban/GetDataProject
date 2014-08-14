@@ -73,6 +73,8 @@ activityLabels <- getActivitiesLabels()
 
 fullDataSet <- merge(fullDataSet, activityLabels, by.x="ActivityID", by.y="V1")
 tidy <- ddply(fullDataSet, .(Subject, V2), function(x) colMeans(x[,1:66]))
+tidy <- tidy[,(c(1,2,4:68))]
+colnames(tidy)[2] <- "Activity"
 write.table(tidy, file="./data/tidy.txt")
 
 
